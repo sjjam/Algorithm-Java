@@ -1,0 +1,79 @@
+package boostcamp;
+
+import java.util.ArrayList;
+
+public class q2 {
+
+	public static void main(String[] args) {
+		/*int[] arrayA = {1, 2, 3, 2};
+		int[] arrayB = {1, 3};*/
+		int[] arrayA = {2, 3, 4, 3, 5};
+		int[] arrayB = {1, 6, 7};
+		solution(arrayA, arrayB);
+	}
+	
+	public static int[] solution(int[] arrayA, int[] arrayB) {
+		int[] answer = new int[5];
+		ArrayList<Integer> filterA = new ArrayList<Integer>();
+		ArrayList<Integer> filterB = new ArrayList<Integer>();
+		for (int i = 0; i < arrayA.length; i++) {
+			if(!filterA.contains(arrayA[i])) {
+				filterA.add(arrayA[i]);
+			}
+		}
+
+		for (int i = 0; i < arrayB.length; i++) {
+			if(!filterB.contains(arrayB[i])) {
+				filterB.add(arrayB[i]);
+			}
+		}
+		
+		ArrayList<Integer> sum = new ArrayList<Integer>();
+		sum.addAll(filterA);
+		
+		for (int i = 0; i < filterB.size(); i++) {
+			if(!sum.contains(filterB.get(i))) {
+				sum.add(filterB.get(i));
+			}
+		}
+		
+		ArrayList<Integer> complement = new ArrayList<Integer>();
+		complement.addAll(filterA);
+		
+		for (int i = 0; i < filterB.size(); i++) {
+			if(complement.contains(filterB.get(i))) {
+				complement.remove(filterB.get(i));
+			}
+		}
+		
+		ArrayList<Integer> intersect = new ArrayList<Integer>();
+		for (int i = 0; i < filterB.size(); i++) {
+			if(filterA.contains(filterB.get(i))) {
+				intersect.add(filterB.get(i));
+			}
+		}
+		
+		for (int i = 0; i < sum.size(); i++) {
+			System.out.println(sum.get(i));
+		}
+		System.out.println("-----");
+		for (int i = 0; i < complement.size(); i++) {
+			System.out.println(complement.get(i));
+		}
+		System.out.println("-----");
+		for (int i = 0; i < intersect.size(); i++) {
+			System.out.println(intersect.get(i));
+		}
+		answer[0] = filterA.size();
+		answer[1] = filterB.size();
+		answer[2] = sum.size();
+		answer[3] = complement.size();
+		answer[4] = intersect.size();
+		System.out.println("-----");
+		for (int i = 0; i < answer.length; i++) {
+			System.out.println(answer[i]);
+		}
+		return answer;
+	}
+
+}

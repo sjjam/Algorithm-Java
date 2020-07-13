@@ -1,0 +1,26 @@
+package programmers;
+
+import java.util.TreeMap;
+
+public class programmers17686 {
+
+	public static void main(String[] args) {
+		String[] files = {"img12.png", "img10.png", "img02.png", "img1.png", "IMG01.GIF", "img2.JPG"};
+		solution(files);
+	}
+	
+	public static String[] solution(String[] files) {
+		String[] answer = {};
+		//String[] head = new String[files.length];
+		TreeMap<String, String> map = new TreeMap<>();
+		String[] number = new String[files.length];
+		String[] tail = new String[files.length];
+		for (int i = 0; i < files.length; i++) {
+			String head = files[0].split("[0-9]")[0]
+		}
+		String array = files[0].split("[0-9]")[0];
+		System.out.println(array);
+        return answer;
+    }
+
+}

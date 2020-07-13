@@ -1,0 +1,4 @@
+SELECT distinct c.user_id from carts c, cart_products p
+    where c.id = p.cart_id
+    and p.name = '¹Ð°¡·ç'
+    order by c.user_id

@@ -1,0 +1,22 @@
+package boostcamp;
+
+public class q1 {
+
+	public static void main(String[] args) {
+		String[] name_list = {"º½", "¿©¿ï", "º½º½"};
+		solution(name_list);
+	}
+	
+	public static boolean solution(String[] name_list) {
+		boolean answer = true;
+		String[] split = null;
+		for (int i = 0; i < name_list.length - 1; i++) {
+			split = name_list[i].split("");
+		}
+		for (int i = 0; i < split.length; i++) {
+			
+		}
+		return answer;
+	}
+
+}
