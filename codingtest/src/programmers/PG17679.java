@@ -1,14 +1,11 @@
 package programmers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PG17679 {
 
 	public static void main(String[] args) {
-		int m = 2;
-		int n = 2;
-		String[] board = {"AA", "AB"};
+		int m = 6;
+		int n = 6;
+		String[] board = {"TTTANT", "RRFACC", "RRRFCC", "TRRRAA", "TTMMMF", "TMMTTJ"};
 		solution(m, n, board);
 	}
 	
@@ -31,8 +28,7 @@ public class PG17679 {
 		}
         System.out.println("---------------------");
         
-        List<String> checkList = new ArrayList<String>();
-        List<String> countList = new ArrayList<String>();
+        boolean[][] boolList = new boolean[m][n];
         int isremove = 1;
         while(isremove != 0) {
         	isremove = 0;
@@ -40,25 +36,34 @@ public class PG17679 {
             for (int i = m - 1; i >= 0; i--) {
     			for (int j = n - 1; j >= 0; j--) {
     				//checkList.addAll(find(boardMap, i, j, boardMap[i][j]));
-    				isremove += find(boardMap, i, j, boardMap[i][j]);
+    				boolList = find(boardMap, i, j, boardMap[i][j], boolList);
     			}
-    			System.out.println();
     		}
-            System.out.println(checkList.size()+"^^^^");
+            /*System.out.println(checkList.size()+"^^^^");
             //중복 제거한 list
             for (int i = 0; i < checkList.size(); i++) {
     			if(!countList.contains(checkList.get(i))) {
     				countList.add(checkList.get(i));
     			}
     		}
-            System.out.println(countList.size()+"!!!!!");
-            System.out.println("-----------------------");
+            System.out.println(countList.size()+"!!!!!");*/
             for (int i = 0; i < m; i++) {
     			for (int j = 0; j < n; j++) {
-    				System.out.print(boardMap[i][j]);
+    				System.out.print(boolList[i][j]);
     			}
     			System.out.println();
     		}
+            
+            for (int i = 0; i < m; i++) {
+    			for (int j = 0; j < n; j++) {
+    				if(boolList[i][j] == true) {
+    					boardMap[i][j] = "0";
+    					boolList[i][j] = false;
+    					isremove++;
+    				}
+    			}
+    		}
+            
             for (int i = m - 1; i >= 0; i--) {
     			for (int j = n - 1; j >= 0; j--) {
     				if(boardMap[i][j].equals("0")) {
@@ -79,6 +84,7 @@ public class PG17679 {
     			}
     			System.out.println();
     		}
+            System.out.println();
         }
         for (int i = 0; i < boardMap.length; i++) {
 			for (int j = 0; j < boardMap[0].length; j++) {
@@ -91,10 +97,8 @@ public class PG17679 {
         return answer;
     }
 	
-	public static int find(String[][] boardMap, int x, int y, String pos) {
-		int chk = 0;
-		int isremove = 0;
-		List<String> checkList = new ArrayList<String>();
+	public static boolean[][] find(String[][] boardMap, int x, int y, String pos, boolean[][] boolList) {
+		//boolean[][] boolList = new boolean[boardMap.length][boardMap[0].length];
 		int vx = x - 1;
 		int vy = y + 0;
 		int hx = x + 0;
@@ -105,24 +109,26 @@ public class PG17679 {
 			if(boardMap[vx][vy].equals(pos)) {
 				if(vx >= 0 && vy-1 >=0 && vx < boardMap.length && vy-1 < boardMap[0].length) {
 					if(boardMap[hx][hy].equals(pos) && boardMap[vx][vy-1].equals(pos) && !pos.equals("0")) {
-						checkList.add(Integer.toString(x)+Integer.toString(y));
+						//checkList.add(Integer.toString(x)+Integer.toString(y));
+						boolList[x][y] = true;
 						for (int i = 0; i < 3; i++) {
 							//checkList.add(Integer.toString(x + dx[i])+Integer.toString(y + dy[i]));
 							//checkList.addAll(find(boardMap, x + dx[i], y + dy[i], boardMap[x + dx[i]][y + dy[i]]));
-							find(boardMap, x + dx[i], y + dy[i], boardMap[x + dx[i]][y + dy[i]]);
+							//find(boardMap, x + dx[i], y + dy[i], boardMap[x + dx[i]][y + dy[i]]);
+							boolList[x + dx[i]][y + dy[i]] = true;
+							//boolList = find(boardMap, x + dx[i], y + dy[i], boardMap[x + dx[i]][y + dy[i]], boolList);
 						}
-						boardMap[x][y] = "0";
+						/*boardMap[x][y] = "0";
 						boardMap[vx][vy] = "0";
 						boardMap[hx][hy] = "0";
 						boardMap[vx][vy-1] = "0";
 						chk = 4;
-						isremove++;
+						isremove++;*/
 					}
 				}
 			}
 		}
-		System.out.print(chk);
-		return isremove;
+		return boolList;
 	}
 
 }
