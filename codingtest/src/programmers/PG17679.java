@@ -11,7 +11,7 @@ public class PG17679 {
 	
 	public static int solution(int m, int n, String[] board) {
         int answer = 0;
-        //Map¿¡ °ª ÀúÀå
+        //Mapì— ê°’ ì €ì¥
         String[][] boardMap = new String[m][n];
         for (int i = 0; i < board.length; i++) {
 			String[] split = board[i].split("");
@@ -19,7 +19,7 @@ public class PG17679 {
 				boardMap[i][j] = split[j];
 			}
 		}
-        //map È®ÀÎ
+        //map í™•ì¸
         for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
 				System.out.print(boardMap[i][j]);
@@ -32,21 +32,12 @@ public class PG17679 {
         int isremove = 1;
         while(isremove != 0) {
         	isremove = 0;
-        	//map µ¹¸é¼­ 4°³ÀÎ°Å list·Î ¹İÈ¯
+        	//map ëŒë©´ì„œ 4ê°œì¸ê±° listë¡œ ë°˜í™˜
             for (int i = m - 1; i >= 0; i--) {
     			for (int j = n - 1; j >= 0; j--) {
-    				//checkList.addAll(find(boardMap, i, j, boardMap[i][j]));
     				boolList = find(boardMap, i, j, boardMap[i][j], boolList);
     			}
     		}
-            /*System.out.println(checkList.size()+"^^^^");
-            //Áßº¹ Á¦°ÅÇÑ list
-            for (int i = 0; i < checkList.size(); i++) {
-    			if(!countList.contains(checkList.get(i))) {
-    				countList.add(checkList.get(i));
-    			}
-    		}
-            System.out.println(countList.size()+"!!!!!");*/
             for (int i = 0; i < m; i++) {
     			for (int j = 0; j < n; j++) {
     				System.out.print(boolList[i][j]);
@@ -98,7 +89,6 @@ public class PG17679 {
     }
 	
 	public static boolean[][] find(String[][] boardMap, int x, int y, String pos, boolean[][] boolList) {
-		//boolean[][] boolList = new boolean[boardMap.length][boardMap[0].length];
 		int vx = x - 1;
 		int vy = y + 0;
 		int hx = x + 0;
@@ -112,18 +102,8 @@ public class PG17679 {
 						//checkList.add(Integer.toString(x)+Integer.toString(y));
 						boolList[x][y] = true;
 						for (int i = 0; i < 3; i++) {
-							//checkList.add(Integer.toString(x + dx[i])+Integer.toString(y + dy[i]));
-							//checkList.addAll(find(boardMap, x + dx[i], y + dy[i], boardMap[x + dx[i]][y + dy[i]]));
-							//find(boardMap, x + dx[i], y + dy[i], boardMap[x + dx[i]][y + dy[i]]);
 							boolList[x + dx[i]][y + dy[i]] = true;
-							//boolList = find(boardMap, x + dx[i], y + dy[i], boardMap[x + dx[i]][y + dy[i]], boolList);
 						}
-						/*boardMap[x][y] = "0";
-						boardMap[vx][vy] = "0";
-						boardMap[hx][hy] = "0";
-						boardMap[vx][vy-1] = "0";
-						chk = 4;
-						isremove++;*/
 					}
 				}
 			}
