@@ -9,13 +9,15 @@ public class PG17683 {//¹æ±Ý±×°î
 
 	public static void main(String[] args) {
 		String m = //"ABCDEFG";
+				//"CC#BCC#BCC#BCC#B";
 			//"ABC";
-				//"A#";
-				"CCB";
+				"A#";
+				//"CCB";
 		String[] musicinfos = //{"12:00,12:14,HELLO,CDEFGAB", "13:00,13:05,WORLD,ABCDEF"};
+			//{"03:00,03:30,FOO,CC#B", "04:00,04:08,BAR,CC#BCC#BCC#B"};
 			//{"12:00,12:14,HELLO,C#DEFGAB", "13:00,13:05,WORLD,ABCDEF"};
-			//{"13:00,13:02,HAPPY,B#A#"};
-			{"03:00,03:10,FOO,CCB#CCB"};
+			{"13:00,13:02,HAPPY,B#A#"};
+			//{"03:00,03:10,FOO,CCB#CCB"};
 		solution(m, musicinfos);
 	}
 
@@ -30,24 +32,24 @@ public class PG17683 {//¹æ±Ý±×°î
 			String[] end = split[1].split(":");
 			time = (Integer.parseInt(end[0]) * 60 + Integer.parseInt(end[1])) - (Integer.parseInt(start[0]) * 60 + Integer.parseInt(start[1]));
 			String[] code = split[3].split("");
-			int plustime = 0;
-			for (int j = 0; j < code.length; j++) {
-				if(code[j].equals("#")) {
-					plustime++;
-				}
-			}
 			String pcode = "";
 			int cnt = 0;
 			for (int j = 0; j < code.length; j++) {
-				if(cnt == time + plustime) {
+				if(cnt == time) {
+					if(code[j].equals("#")) {
+						pcode += code[j];
+					}
 					break;
 				}
 				pcode += code[j];
-				cnt++;
+				if(!code[j].equals("#")) {
+					cnt++;
+				}
 				if(j == code.length - 1) {
 					j = -1;
 				}
 			}
+			System.out.println(pcode + cnt);
 			play.add(pcode);
 			if(play.get(i).contains(m)) {
 				if(m.contains("#")) {
