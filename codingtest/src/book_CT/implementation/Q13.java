@@ -97,6 +97,7 @@ public class Q13 {
         for (int i = 0; i < chickenList.size(); i++) {
             result = Math.min(result, getSum(chickenList.get(i)));
         }
+
         System.out.println(result);
     }
 
